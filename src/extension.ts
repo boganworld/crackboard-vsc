@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 
 // Constants
 const HEARTBEAT_INTERVAL = 2 * 60 * 1000; // 2 minutes in milliseconds
-const ENDPOINT = 'https://crackboard.dev/heartbeat';
+const ENDPOINT = 'http://crackboard.dev/heartbeat';
 
 // Variables
 let lastHeartbeatTime: number | undefined;
@@ -25,6 +25,7 @@ const sendHeartbeat = async (language: string) => {
 
         if (response.ok) {
             lastHeartbeatTime = Date.now();
+            console.log('Heartbeat sent successfully.');
         } else {
             console.error('Failed to send heartbeat:', response.statusText);
         }
@@ -63,8 +64,14 @@ const inputSessionKey = async () => {
 
     if (result !== undefined) {
         sessionKey = result;
-        await vscode.workspace.getConfiguration().update('crackboard.sessionKey', sessionKey, vscode.ConfigurationTarget.Global);
-        vscode.window.showInformationMessage(`Session key set to: ${sessionKey}`);
+        try {
+            await vscode.workspace.getConfiguration().update('crackboard.sessionKey', sessionKey, vscode.ConfigurationTarget.Global);
+            vscode.window.showInformationMessage(`Session key set to: ${sessionKey}`);
+            console.log(`Session key updated successfully: ${sessionKey}`);
+        } catch (error) {
+            vscode.window.showErrorMessage('Failed to save session key.');
+            console.error('Failed to save session key:', error);
+        }
     }
 };
 
@@ -72,6 +79,7 @@ const inputSessionKey = async () => {
 const loadSessionKey = () => {
     const config = vscode.workspace.getConfiguration();
     sessionKey = config.get<string>('crackboard.sessionKey');
+    console.log(`Loaded session key: ${sessionKey}`);
 };
 
 export function activate(context: vscode.ExtensionContext) {

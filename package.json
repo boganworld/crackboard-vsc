@@ -3,13 +3,13 @@
   "displayName": "crackboard",
   "description": "tpot leaderboard productivity tracker",
   "publisher": "crackboard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/boganworld/crackboard-vsc.git"
   },
   "engines": {
-    "vscode": "^1.92.0"
+    "vscode": "^1.91.1"
   },
   "categories": [
     "Other"
@@ -20,22 +20,22 @@
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-        {
-            "command": "crackboard.inputSessionKey",
-            "title": "Crackboard: Set Session Key"
+      {
+        "command": "crackboard.inputSessionKey",
+        "title": "Crackboard: Set Session Key"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Crackboard Configuration",
+      "properties": {
+        "crackboard.sessionKey": {
+          "type": "string",
+          "default": "",
+          "description": "Session key for Crackboard."
         }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "Crackboard Configuration",
-            "properties": {
-                "crackboard.sessionKey": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Session key for Crackboard."
-                }
-            }
-        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -46,14 +46,14 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.92.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
+    "@types/vscode": "^1.19.0",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.11.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.4.5",
     "@vscode/test-cli": "^0.0.9",
-    "@vscode/test-electron": "^2.4.0"
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
   }
 }

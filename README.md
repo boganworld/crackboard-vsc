@@ -27,7 +27,7 @@ Install the extension as shown below:
 
 ![VS Code Extension Settings Screenshot](img/session_setting.png)
 
-3. Paste your session key copied from [crackboard](https://crackboard.dev/).
+3. Paste your session key copied from <strong>[crackboard](https://crackboard.dev/)</strong>.
 
    ![Session Key from Website](img/session_key_web.png)
    <br>
